@@ -1,97 +1,114 @@
 
-html,body {
-    background:#000;
-    overflow:hidden;
-    min-width:100%;
-    padding:0;
-    margin:0;
-}
+        :root {
+            --primary-bg: #121212;
+            --overlay-bg: rgba(0, 0, 0, 0.6);
 
-        #video-player {
-       position:absolute;         top:0; 
-     right:0; 
-           
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+
+            background-color: var(--primary-bg);
+
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+        }
+
+
+
+        /* --- Main Layout --- */
+        main {
+            width: 100%;
+            max-width: 1200px; /* Limits width on huge screens */
+            display: flex;
+            justify-content: center;
+        }
+
+        /* --- Player Container (The 16:9 Box) --- */
+        .player-wrapper {
+            position: relative;
+            width: 100%;
+            /* Modern CSS property to enforce 16:9 aspect ratio */
+            aspect-ratio: 16 / 9; 
+            background-color: #000;
+
+            overflow: hidden; /* Ensures overlays stay inside corners */
+        }
+
+        /* Fallback for browsers that don't support aspect-ratio (rare now) */
+        @supports not (aspect-ratio: 16 / 9) {
+            .player-wrapper {
+                height: 0;
+                padding-bottom: 56.25%; /* 16:9 ratio calculation */
+            }
+        }
+
+        /* --- Iframe Styles --- */
+        .player-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             border: none;
-    transition:width 0.8s ease, height 0.8s ease,
-                transform 0.8s ease;   
-    transform-origin: right top;      
-            
+            z-index: 1;
         }
 
-  #video-player.small{
-    width:650px;         
-    height:300px;        
-  }
+        /* --- Overlay Logo (Top Right) --- */
+        .overlay-logo {
+            position: absolute;
+            top: 40px;
+            right: 20px;
+            z-index: 15;
+            width: auto;
+            height: 60px; /* Adjust logo size */
+            max-width: 25%; /* Prevent logo from being too huge on mobile */
+            object-fit: contain;
 
-
-
-
-
-.follow{
-  position:fixed;
-  right:90px;
-  top:50px;
-}
-.follow img {
-    width: 110px;
-    height: 60px;
-
-
-}
-
-        #marquee {
-            font-size: 20px;
-            font-weight: bold;
-            
-      
-        position: fixed;
-        overflow: hidden;
-        margin: 0;
+        }
         
+        .overlay-logo1 {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 10;
+            width: auto;
+            height: 35px; /* Adjust logo size */
+            max-width: 25%; /* Prevent logo from being too huge on mobile */
+            object-fit: contain;
+
+        }
         
-        top: 0;
-        left: 0;
-        right: 0;
-        background-color: #4169e1;
-        color: #ffffff;
-      }
-    
-.slider-container {
-    
-bottom :0px;
-    width: 100%;
-    height: 70px;
-   overflow: hidden;
-    position: fixed;
-    
-}
+    .marquee-overlay {
+      position: absolute;
+      top: 0;                 /* distance from bottom of the video */
+      left: 0;
+      width: 100%;
+      color: #fff;
+     background: blue;
+      font-size: 1.2rem;
+    font-weight: bold;
+     z-index: 8;
 
-.slider-wrapper {
-    display: flex;
-    transition: transform 0.5s ease-in-out; /* Smooth sliding transition */
-}
-
-/* Each slide takes up the full width of the container */
-.slide {
-    min-width: 100%;
-    box-sizing: border-box;
-}
-
-.slide img {
-    width: 100%;
-    height: 70px;
-    display: block;
-}
-
-
+      overflow: hidden;
+    }
+        
         #clock-container {
             background-color: red;
             width: 100px;
             
             height: 35px;
-position:fixed;
+    position:absolute;
+     z-index: 11;
   right:0px;
   top:0px;
             
@@ -112,28 +129,46 @@ position:fixed;
             transition: opacity 0.5s ease-in-out; 
         }
         
-        .marquee-label {
-            position: absolute;
-            left: 0;
-             top:0px;
-            background: red;
-            color: white;
-            padding: 0 20px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            font-size: 16px;
-            
-            border-right: 3px solid #ffd700;
-        }
-        
+
+.slider-container {
+    
+   bottom: 0px;
+    width: 100%;
+    height: 50px;
+   overflow: hidden;
+    position: absolute;
+    z-index: 9;
+    
+     
+            object-fit: contain;
+}
+
+.slider-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out; 
+}
+
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.slide img {
+    width: 100%;
+    height: 50px;
+    display: block;
+}
+
 #image-slider-container {
     /* Hidden by default */
     display: none;
     overflow: hidden;
     /* Overlay styles */
-    position: fixed;
+    
+    
+position:absolute;
+     z-index: 12;
     top: 0;
     left: 0;
     width: 100%;
@@ -163,50 +198,64 @@ position:fixed;
 }
 
 
+
+
+
+
+
+
+
+        /* --- Responsive Tweaks --- */
+        @media (max-width: 768px) {
+    .overlay-logo {
+                height: 40px;
+                top: 40px;
+                right: 10px;
+            }
+            
+    .overlay-logo1 {
+     height: 35px;
+      top: 0px;
+     left: 0px;
+            }
+            
+        .marquee-overlay  {
+
+        top: 0;
+        left: 0;
+        right: 0;
+
+      }
+      
+        #clock-container {
+     height: 35px;
+
+      right:0px;
+        top:0px;
+            
+        }
+            
+.slider-container {
     
+    bottom: 0 px;
+    width: 100%;
+    height: 50px;
+   
+           }
+            
+#image-slider-container {
     
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
 
+}
+            
+            
+            
+            
+            
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
