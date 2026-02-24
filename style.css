@@ -67,7 +67,7 @@
         .overlay-logo {
             position: absolute;
             top: 40px;
-            right: 30px;
+            right: 50px;
             z-index: 15;
             width: 100px;
             height: 60px; /* Adjust logo size */
