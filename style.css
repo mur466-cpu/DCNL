@@ -67,9 +67,9 @@
         .overlay-logo {
             position: absolute;
             top: 40px;
-            right: 20px;
+            right: 30px;
             z-index: 15;
-            width: 120px;
+            width: 100px;
             height: 60px; /* Adjust logo size */
             max-width: 25%; /* Prevent logo from being too huge on mobile */
             object-fit: contain;
@@ -134,7 +134,7 @@
     
    bottom: 0px;
     width: 100%;
-    height: 50px;
+    height: 60px;
    overflow: hidden;
     position: absolute;
     z-index: 9;
@@ -156,7 +156,7 @@
 
 .slide img {
     width: 100%;
-    height: 50px;
+    height: 60px;
     display: block;
 }
 
