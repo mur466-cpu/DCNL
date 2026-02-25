@@ -1,146 +1,77 @@
 
-        :root {
-            --primary-bg: #121212;
-            --overlay-bg: rgba(0, 0, 0, 0.6);
+html,body {
+    background:#000;
+    overflow:hidden;
+    min-width:100%;
+    padding:0;
+    margin:0;
+}
 
-        }
+        #video-player {
+       position:absolute;         top:0; 
+     right:0; 
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        
-        body {
-
-            background-color: var(--primary-bg);
-
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0px;
-        }
-
-
-
-        /* --- Main Layout --- */
-        main {
-            width: 100%;
-            max-width: 1200px; /* Limits width on huge screens */
-            display: flex;
-            justify-content: center;
-        }
-
-        /* --- Player Container (The 16:9 Box) --- */
-        .player-wrapper {
-            position: relative;
-            width: 100%;
-            /* Modern CSS property to enforce 16:9 aspect ratio */
-            aspect-ratio: 16 / 9; 
-            background-color: #000;
-
-            overflow: hidden; /* Ensures overlays stay inside corners */
-        }
-
-        /* Fallback for browsers that don't support aspect-ratio (rare now) */
-        @supports not (aspect-ratio: 16 / 9) {
-            .player-wrapper {
-                height: 0;
-                padding-bottom: 56.25%; /* 16:9 ratio calculation */
-            }
-        }
-
-        /* --- Iframe Styles --- */
-        .player-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
             border: none;
-            z-index: 1;
+    transition:width 0.8s ease, height 0.8s ease,
+                transform 0.8s ease;   
+    transform-origin: right top;      
+            
         }
 
-        /* --- Overlay Logo (Top Right) --- */
-        .overlay-logo {
-            position: absolute;
-            top: 40px;
-            right: 50px;
-            z-index: 15;
-            width: 100px;
-            height: 60px; /* Adjust logo size */
-            max-width: 25%; /* Prevent logo from being too huge on mobile */
-            object-fit: contain;
+  #video-player.small{
+    width:650px;         
+    height:300px;        
+  }
 
-        }
-        
-        .overlay-logo1 {
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            z-index: 10;
-            width: auto;
-            height: 30px; /* Adjust logo size */
-            max-width: 25%; /* Prevent logo from being too huge on mobile */
-            object-fit: contain;
 
-        }
-        
+.follow{
+  position:fixed;
+  right:90px;
+  top:50px;
+}
+.follow img {
+    width: 110px;
+    height: 60px;
+
+}
+
+.follow1{
+  position:fixed;
+  left:0px;
+  top:0px;
+}
+.follow1 img {
+    width: 80px;
+    height: 35px;
+
+}
+
     .marquee-overlay {
       position: absolute;
-      top: 0;                 /* distance from bottom of the video */
+      top: 0;                 
       left: 0;
       width: 100%;
       color: #fff;
      background: blue;
-      font-size: 20px;
+      font-size: 1.2rem;
     font-weight: bold;
-     z-index: 8;
+
 
       overflow: hidden;
     }
-        
-        #clock-container {
-            background-color: red;
-            width: 100px;
-            
-            height: 30px;
-    position:absolute;
-     z-index: 11;
-  right:0px;
-  top:0px;
-            
-            
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
 
-        
-        #display {
-            color: white;
-            font-size: 15px; /* Large, readable font size */
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); 
-            opacity: 1;
-            transition: opacity 0.5s ease-in-out; 
-        }
-        
-
+    
 .slider-container {
     
-   bottom: 0px;
+bottom :0px;
     width: 100%;
-    height: 60px;
+    height: 70px;
    overflow: hidden;
-    position: absolute;
-    z-index: 9;
+    position: fixed;
     
-     
-            object-fit: contain;
 }
 
 .slider-wrapper {
@@ -156,19 +87,45 @@
 
 .slide img {
     width: 100%;
-    height: 60px;
+    height: 70px;
     display: block;
 }
 
+
+        #clock-container {
+            background-color: red;
+            width: 100px;
+            
+            height: 35px;
+position:fixed;
+  right:0px;
+  top:0px;
+            
+            
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        
+        #display {
+            color: white;
+            font-size: 1rem; 
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); 
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out; 
+        }
+        
+
+        
 #image-slider-container {
-    /* Hidden by default */
+    
     display: none;
     overflow: hidden;
     /* Overlay styles */
-    
-    
-position:absolute;
-     z-index: 12;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -177,87 +134,71 @@ position:absolute;
 
 }
 
-/* Class to make the slider visible */
+
 #image-slider-container.active {
-    display: flex; /* Use flex to enable centering */
+    display: flex; 
 }
 
-/* The image inside the slider */
+
 #slider-image {
     width: 100%;
     height: 100%;
     
-    /* Add a subtle fade-in effect for image changes */
+
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
 }
 
-/* You could add a fade-out class for a smoother transition between images */
+
 #slider-image.fade-out {
     opacity: 0;
 }
 
 
-
-
-
-
-
-
-
-        /* --- Responsive Tweaks --- */
-        @media (max-width: 768px) {
-    .overlay-logo {
-                height: 40px;
-                top: 40px;
-                right: 10px;
-            }
-            
-    .overlay-logo1 {
-     height: 20px;
-      top: 0px;
-     left: 0px;
-            }
-            
-        .marquee-overlay  {
-
-        top: 0;
-        left: 0;
-        right: 0;
-        font-size: 8px;
-    font-weight: bold;      
-
-      }
-      
-        #clock-container {
-     height: 20px;
-
-      right:0px;
-        top:0px;
-            
-        }
-            
-.slider-container {
     
-    bottom: 0 px;
-    width: 100%;
-    height: 30px;
-   
-           }
-            
-#image-slider-container {
     
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
 
 
-}
-            
-            
-            
-            
-            
 
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
